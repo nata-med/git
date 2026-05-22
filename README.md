@@ -32,11 +32,13 @@ The program implements several functions for creating and using your own Git
 "3. Shifts the pointer to the parent hash, moving backward in time until it hits the print limit or the initial '0' commit.\n"
         
 "diff"
-"What it accepts: Nothing\n"
-"Data handling: 1. Opens metadata.txt of the target commit and skips the header.\n"
-"2. For each file, opens both the saved version in .vcs/commits/ and the physical file in the current working directory.\n"
-"3. Compares them line by line and prints the differences (+ for added lines, - for removed lines) to the console.\n"
-        
+"What it accepts: Optional - a target commit hash to compare with the current state."
+"Data handling: 1. Checks if a target hash was provided. If not, runs in line-by-line text mode."
+"2. Text mode (No hash): Opens metadata.txt of HEAD. For each file, opens the saved version and the physical file in the directory, printing line differences (+ and -)."
+"3. Hash mode (With hash): Opens metadata.txt for both the current HEAD and the target commit."
+"4. Compares file names and their hashes between the two lists to instantly identify modified (*), added (+), and removed (-) files without reading their full text."
+      
+    
 "status"
 "What it accepts: Nothing.\n"
 "Data handling: 1. Opens the .vcs/index file for reading.\n"
