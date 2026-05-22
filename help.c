@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "commands.h"
-#include <direct.h>
 #include <time.h>
-#include <io.h>
 
 void func_print_help(){
     printf(" Here you will see all instructions for using the commands:\n ");

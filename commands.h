@@ -1,6 +1,18 @@
 #ifndef SUM_H_749837
 #define SUM_H_749837
+
 #include <stdio.h>
+#include <sys/stat.h> 
+
+#ifdef _WIN32
+    #include <direct.h>
+    #include <io.h>
+#else
+    #include <sys/types.h>
+    #include <unistd.h>
+    #define mkdir(path) mkdir(path, 0777)
+#endif
+
 void func_init_repository();
 void func_add_file(char *el);
 void func_remove_file(char *el);

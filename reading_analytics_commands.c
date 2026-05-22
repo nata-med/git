@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "commands.h"
-#include <direct.h>
 #include <time.h>
-#include <io.h>
 
 void func_status(){
     if(access(".vcs", 0)!=0){

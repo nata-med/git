@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "commands.h"
-#include <direct.h>
 #include <time.h>
-#include <io.h>
 
 void func_init_repository(){
     if (access(".vcs", 0)==0){
@@ -28,12 +26,20 @@ void func_remove_file(char *filename){
         fprintf(stderr, "Error: no such file names in directory\n");
         return;
     }
+    struct stat path_stat;
+    if (stat(filename, &path_stat) == 0) {
+        if (path_stat.st_mode & S_IFDIR) {
+            fprintf(stderr, "Error: '%s' is a directory. You can only add files.\n", filename);
+            return;
+        }
+    }
     char status;
     char str[100];
     int flag=0;
     FILE *file_orig= fopen(".vcs/index", "r");
     if(file_orig==NULL){
         fprintf(stderr, "Error: there is no file ready to commit\n");
+        return;
     }
     FILE *file_new= fopen(".vcs/index.tmp", "w");
     while(fscanf(file_orig, " %c %s", &status, str)==2){
@@ -62,12 +68,20 @@ void func_add_file(char *filename){
         fprintf(stderr, "Error: no such file names in directory\n");
         return;
     }
+    struct stat path_stat;
+    if (stat(filename, &path_stat) == 0) {
+        if (path_stat.st_mode & S_IFDIR) { // Если это директория
+            fprintf(stderr, "Error: '%s' is a directory. You can only add files.\n", filename);
+            return;
+        }
+    }
     char status;
     char str[100];
     int flag=0;
     FILE *file_orig= fopen(".vcs/index", "r");
     if(file_orig==NULL){
         fprintf(stderr, "Error: there is no file ready to commit\n");
+        return;
     }
     FILE *file_new= fopen(".vcs/index.tmp", "w");
     while(fscanf(file_orig, " %c %s", &status, str)==2){

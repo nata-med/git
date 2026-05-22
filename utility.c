@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "commands.h"
-#include <direct.h>
 #include <time.h>
-#include <io.h>
 
 unsigned int hash_string(char* str){
     unsigned int hash=5381;
