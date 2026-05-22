@@ -48,7 +48,11 @@ int main(int argc, char *argv[]){
         func_log(start_commit, limit);
 
     }else if (strcmp(argv[1], "diff")==0){
-        func_diff();
+        if (argc>= 3) {
+            func_diff(argv[2]); 
+        } else {
+            func_diff(NULL);   
+        }
 
     }else if (strcmp(argv[1], "status")==0){
         func_status();

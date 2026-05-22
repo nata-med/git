@@ -18,7 +18,7 @@ void func_add_file(char *el);
 void func_remove_file(char *el);
 void func_make_commit(char *el);
 void func_log(char *start_commit, int limit_print);
-void func_diff();
+void func_diff(char *el);
 void func_status();
 void func_checkout(char *el);
 unsigned int hash_string(char* str);

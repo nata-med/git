@@ -87,7 +87,7 @@ void func_add_file(char *filename){
     }
     struct stat path_stat;
     if (stat(filename, &path_stat) == 0) {
-        if (path_stat.st_mode & S_IFDIR) { // Если это директория
+        if (path_stat.st_mode & S_IFDIR) { 
             fprintf(stderr, "Error: '%s' is a directory. You can only add files.\n", filename);
             return;
         }
@@ -194,7 +194,8 @@ void func_make_commit(char *message){
         }
         char old_filename[512];
         char old_hash[512];
-        fscanf(cur_file, "%511s %511s", old_filename, old_hash);
+        char skip_time[512];
+        fscanf(cur_file, "%511s %511s %511s", old_filename, old_hash, skip_time);     
         while (fscanf(cur_file, "%511s %511s", old_filename, old_hash)==2){
             int flag=0;
             char status;
