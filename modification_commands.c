@@ -17,6 +17,10 @@ void func_init_repository(){
     }
     fclose(file1);
     FILE* file2 = fopen(".vcs/HEAD","w");
+    if(file2==NULL){
+        fprintf(stderr, "Error: issues while making .vcs/HEAD\n");
+        return;
+    }
     fprintf(file2, "%d", 0);
     fclose(file2);
 }
