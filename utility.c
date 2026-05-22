@@ -20,6 +20,11 @@ void copy_file(char* what_to_copy, char* where_to_copy){
         return;
     }
     FILE* file_where = fopen(where_to_copy, "wb");
+    if(file_where==NULL){
+        fprintf(stderr, "Error: cannot create or write to destination file\n");       
+        fclose(file_what);
+        return;
+    }
     int c;
     while((c=fgetc(file_what))!=EOF){
         fputc(c, file_where);
@@ -38,7 +43,7 @@ void compare_two_files(char *old_file_path, char *new_file_path, char *file_name
     }
     if(old_file==NULL && new_file!=NULL){
         printf("--- %s (New file)\n", file_name);
-        char line[256];
+        char line[4096];
         while (fgets(line, sizeof(line), new_file)) {
             printf("+ %s", line);
         }
@@ -47,8 +52,8 @@ void compare_two_files(char *old_file_path, char *new_file_path, char *file_name
         return;
     }
     if(old_file==NULL && new_file==NULL) return;
-    char old_line[100];
-    char new_line[100];
+    char old_line[4096];
+    char new_line[4096];
     int line_num=1;
     while(1){
         char* cur_old = fgets(old_line, sizeof(old_line), old_file);
@@ -60,7 +65,7 @@ void compare_two_files(char *old_file_path, char *new_file_path, char *file_name
             printf("-%d: %s", line_num, old_line);
             if (old_line[strlen(old_line) - 1] != '\n') printf("\n");
         } else if(cur_new!=NULL && cur_old==NULL){
-            printf("+%d: %s", line_num, old_line);
+            printf("+%d: %s", line_num, new_line);
             if (new_line[strlen(new_line) - 1] != '\n') printf("\n");
         } else if(strcmp(old_line, new_line)!=0){
             printf("-%d: %s", line_num, old_line);
