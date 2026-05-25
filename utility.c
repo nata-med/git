@@ -78,3 +78,32 @@ void compare_two_files(char *old_file_path, char *new_file_path, char *file_name
     fclose(old_file);
     fclose(new_file);
 }
+
+void create_dirs_for_file(char *filepath) {
+    char temp[1024];
+    snprintf(temp, sizeof(temp), "%s", filepath);
+    for (int i = 1; temp[i] != '\0'; i++) {
+        if (temp[i] == '/' || temp[i] == '\\') {
+            char temp_char = temp[i];
+            temp[i] = '\0';           
+            mkdir(temp);
+            temp[i] = temp_char;      
+        }
+    }
+}
+
+void change_space_on_z(char* message){
+    for(int i=0; message[i]!='\0'; i++){
+        if (message[i]==' '){
+            message[i]='*';
+        }
+    }
+}
+
+void change_z_on_space(char* message){
+    for(int i=0; message[i]!='\0'; i++){
+        if (message[i]=='*'){
+            message[i]=' ';
+        }
+    }
+}

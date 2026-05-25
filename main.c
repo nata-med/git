@@ -1,37 +1,25 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include "errors.h"
 #include <stdlib.h>
 #include "commands.h"
 
 int main(int argc, char *argv[]){
-    //if argc is not enough
-    if (argc<2){
-        fprintf(stderr,"Error: you need to put name of command");
-        return 1;
-    }
+    error_need_name_of(argc, 2, "command");
     if (strcmp(argv[1], "init")==0){
         func_init_repository();
 
-    }else if (strcmp(argv[1], "add")==0){        
-        if (argc<3){
-            fprintf(stderr,"Error: you need to put name of file");
-            return 1;
-        }
+    }else if (strcmp(argv[1], "add")==0){ 
+        error_need_name_of(argc, 3, "file");
         func_add_file(argv[2]);
 
     }else if (strcmp(argv[1], "remove")==0){
-        if (argc<3){
-            fprintf(stderr,"Error: you need to put name of file");
-            return 1;
-        }
+        error_need_name_of(argc, 3, "file");
         func_remove_file(argv[2]);
 
     }else if (strcmp(argv[1], "commit")==0){
-        if (argc<3){
-            fprintf(stderr,"Error: you need to put message");
-            return 1;
-        }
+        error_need_message(argc, 3);
         func_make_commit(argv[2]);
 
     }else if (strcmp(argv[1], "log")==0){
@@ -58,18 +46,14 @@ int main(int argc, char *argv[]){
         func_status();
 
     }else if (strcmp(argv[1], "checkout")==0){
-        if (argc<3){
-            fprintf(stderr,"Error: you need to put name of file");
-            return 1;
-        }
+        error_need_name_of(argc, 3, "file");
         func_checkout(argv[2]);
     }else if (strcmp(argv[1], "--help")==0 || strcmp(argv[1], "help")==0){
         func_print_help();
     }else if (strcmp(argv[1], "help_prog_version")==0){
         help_prog_version(argc, argv);
     }else{
-        fprintf(stderr,"Error: unknown command(");
-        return 1;
+        error_unknown();
     }
 
     return 0;

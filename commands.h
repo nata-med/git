@@ -27,4 +27,7 @@ void help_prog_version();
 void help_prog_version(int argc, char* argv[]);
 void copy_file(char* what_to_copy, char* where_to_copy);
 void compare_two_files(char *old_file_path, char *new_file_path, char *file_name);
+void create_dirs_for_file(char *filepath);
+void change_z_on_space(char* message);
+void change_space_on_z(char* message);
 #endif
