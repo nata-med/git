@@ -20,6 +20,7 @@ void func_init_repository(){
 
 void func_remove_file(char *filename){
     error_repository_not_exist();
+    error_outside_repository(filename);
     error_no_such_filename(filename);
     error_directory(filename);
     char status;
@@ -48,6 +49,7 @@ void func_remove_file(char *filename){
 
 void func_add_file(char *filename){
     error_length(filename, 500, "file_name");
+    error_outside_repository(filename);
     error_repository_not_exist();
     error_no_such_filename(filename);
     error_directory(filename);

@@ -17,3 +17,4 @@ void error_no_changes_tocommit(FILE* file);
 void error_need_name_of(int arg1, int arg2, char* arg3);
 void error_need_message(int arg1, int arg2);
 void error_unknown();
+void error_outside_repository(char* filename);

@@ -134,3 +134,20 @@ void error_unknown(){
     fprintf(stderr,"Error: unknown command(\n");
     exit(1);
 }
+
+void error_outside_repository(char* filename){
+    if (filename[0] == '/' || filename[0] == '\\') {
+        fprintf(stderr, "Error: can not add files outside the repository\n");
+        exit(1);
+    }
+    
+    if (strlen(filename) >= 2 && filename[1] == ':') {
+        fprintf(stderr, "Error: can not add files outside the repository\n");
+        exit(1);
+    }
+    
+    if (strstr(filename, "../") != NULL || strstr(filename, "..\\") != NULL) {
+        fprintf(stderr, "Error: can not add files outside the repository\n");
+        exit(1);
+    }
+}
